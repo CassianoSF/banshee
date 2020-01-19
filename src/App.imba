@@ -1,4 +1,4 @@
-console.log "VERSÃO 0.0.8"
+console.log "VERSÃO 0.0.9"
 
 tag App
 
@@ -26,7 +26,7 @@ tag App
 
         let char_writer = await service.getCharacteristic('23bf1882-3af7-11ea-b77f-2e728ce88125')
         console.log char_writer
-        writer = await getDescriptor('gatt.characteristic_user_description')
+        writer = await char_writer.getDescriptor('gatt.characteristic_user_description')
         console.log writer
 
     def write
