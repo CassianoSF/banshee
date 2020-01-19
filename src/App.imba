@@ -37,7 +37,9 @@ tag App
 
     def tick
         schedule interval: 100
-        char_notifier.readValue if char_notifier
+        if char_notifier
+            let test = await char_notifier.readValue
+            console.log test
         render
 
 
