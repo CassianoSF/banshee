@@ -17,14 +17,14 @@ tag App
         let service = await server.getPrimaryService('ab0828b1-198e-4351-b779-901fa0e0371e')
         console.log service
         
-        let char_notifier = await service.getCharacteristic('4ac8a682-9736-4e5d-932b-e9b31405049c')
+        let char_notifier = await service.getCharacteristic('23bf1882-3af7-11ea-b77f-2e728ce88125')
         console.log char_notifier
         char_notifier.addEventListener('characteristicvaluechanged', &) do |e| 
             console.log(e)
             response = e:target:value.getUint8(0)
             console.log response
 
-        let char_writer = await service.getCharacteristic('23bf1882-3af7-11ea-b77f-2e728ce88125')
+        let char_writer = await service.getCharacteristic('4ac8a682-9736-4e5d-932b-e9b31405049c')
         console.log char_writer
         writer = await char_writer.getDescriptor('gatt.client_characteristic_configuration')
         console.log writer
