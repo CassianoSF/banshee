@@ -1,4 +1,4 @@
-console.log "VERSÃO 0.0.18"
+console.log "VERSÃO 0.0.19"
 
 tag App
 
@@ -36,7 +36,7 @@ tag App
         try
             return unless writer
             let encoder = TextEncoder.new('utf-8');
-            let test = await writer.writeValue(encoder.encode(value))
+            let test = await writer.writeValue(0xFFFFFF)
             console.log test
         catch err
             console.log err
