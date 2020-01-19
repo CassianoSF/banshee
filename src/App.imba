@@ -8,6 +8,7 @@ tag App
             #     services: ['ab0828b1-198e-4351-b779-901fa0e0371e']
             # }]
             acceptAllDevices: true
+            optionalServices: ['ab0828b1-198e-4351-b779-901fa0e0371e']
         })
         console.log device
         let server = await device:gatt.connect()
