@@ -2,7 +2,9 @@ tag App
 
     def listDevices
         let device = await global:navigator:bluetooth.requestDevice({
-            acceptAllDevices: yes
+            filters: [{
+                services: ['ab0828b1-198e-4351-b779-901fa0e0371e']
+            }]
         })
         let server = await device:gatt.connect()
         let services = await server.getPrimaryServices()
