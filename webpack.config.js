@@ -28,5 +28,5 @@ module.exports = {
 		extensions: [".imba", ".js", ".json", ".css"]
 	},
 	entry: "./src/App.imba",
-	output: { path: __dirname + '/dist', filename: "index.js" }
+	output: { path: __dirname + '/', filename: "index.js" }
 }
