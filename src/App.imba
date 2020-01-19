@@ -14,7 +14,7 @@ tag App
         })
         let server = await device:gatt.connect()
         console.log server
-        let services = await server.getPrimaryService('ab0828b1-198e-4351-b779-901fa0e0371e')
+        let service = await server.getPrimaryService('ab0828b1-198e-4351-b779-901fa0e0371e')
         console.log service
         
         let char_notifier = await service.getCharacteristic('4ac8a682-9736-4e5d-932b-e9b31405049c')
