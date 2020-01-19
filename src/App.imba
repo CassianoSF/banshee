@@ -1,10 +1,10 @@
-console.log "VERSÃO 0.0.13"
+console.log "VERSÃO 0.0.14"
 
 tag App
 
     prop response default: ''
     prop value
-    prop notifier
+    prop char_notifier
     prop writer
 
     def connect
@@ -17,7 +17,7 @@ tag App
         let service = await server.getPrimaryService('ab0828b1-198e-4351-b779-901fa0e0371e')
         console.log service
         
-        let char_notifier = await service.getCharacteristic('23bf1882-3af7-11ea-b77f-2e728ce88125')
+        char_notifier = await service.getCharacteristic('23bf1882-3af7-11ea-b77f-2e728ce88125')
         console.log char_notifier
         char_notifier.addEventListener('characteristicvaluechanged', &) do |e| 
             console.log(e)
@@ -34,6 +34,12 @@ tag App
         let encoder = TextEncoder.new('utf-8');
         let test = await writer.writeValue(encoder.encode(value))
         console.log test
+
+    def tick
+        schedule interval: 100
+        char_notifier.readValue if char_notifier
+        render
+
 
     def render
         <self>
