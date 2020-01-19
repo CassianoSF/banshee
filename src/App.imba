@@ -6,9 +6,11 @@ tag App
                 services: ['ab0828b1-198e-4351-b779-901fa0e0371e']
             }]
         })
+        console.log device
         let server = await device:gatt.connect()
+        console.log server
         let services = await server.getPrimaryServices()
-        console.log(services);
+        console.log services
         # for service in services
         #     console.log(services);
         #     let characteristics = await service.getCharacteristics()
