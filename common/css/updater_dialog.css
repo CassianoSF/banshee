@@ -1,0 +1,27 @@
+#updater_notification {
+  display: none;
+  text-align: center;
+  z-index: 1;
+  position: fixed;
+  height: 125px;
+  width: 300px;
+  bottom: 20px;
+  right: 20px;
+  font-family: Nunito, sans-serif;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, .96);
+  border: 1px solid rgba(255, 255, 255, .96);
+  border-radius: 2px;
+  outline: 0
+}
+
+#updater_close {
+  position: relative;
+  bottom: 150px;
+  left: 130px;
+}
+
+#updater_reload {
+  margin-top: 10px;
+}
