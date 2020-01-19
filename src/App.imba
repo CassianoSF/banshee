@@ -1,4 +1,4 @@
-console.log "VERSÃO 0.0.2"
+console.log "VERSÃO 0.0.3"
 
 tag App
 
