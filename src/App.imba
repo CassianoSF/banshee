@@ -1,3 +1,5 @@
+console.log "VERSÃO 0.0.1"
+
 tag App
 
     def listDevices
