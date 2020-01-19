@@ -1,4 +1,4 @@
-console.log "VERSÃO 0.0.12"
+console.log "VERSÃO 0.0.13"
 
 tag App
 
@@ -32,9 +32,8 @@ tag App
     def write
         return unless writer
         let encoder = TextEncoder.new('utf-8');
-        console.log(
-            await writer.writeValue(encoder.encode(value))
-        )
+        let test = await writer.writeValue(encoder.encode(value))
+        console.log test
 
     def render
         <self>
