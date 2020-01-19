@@ -18,7 +18,7 @@ tag App
         let char_notifier = await service.getCharacteristic('4ac8a682-9736-4e5d-932b-e9b31405049c')
         char_notifier.addEventListener('characteristicvaluechanged', &) do |e| 
             console.log(e)
-            response = e.target.value.getUint8(0)
+            response = e:target:value.getUint8(0)
 
         let char_writer = await service.getCharacteristic('23bf1882-3af7-11ea-b77f-2e728ce88125')
         writer = await getDescriptor('gatt.characteristic_user_description')
