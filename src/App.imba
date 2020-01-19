@@ -4,7 +4,7 @@ tag App
         let device = await global:navigator:bluetooth.requestDevice({
             acceptAllDevices: yes
         })
-        let server = await device.gatt.connect()
+        let server = await device:gatt.connect()
         let services = await server.getPrimaryServices()
         console.log(services);
         # for service in services
