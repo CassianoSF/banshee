@@ -1,4 +1,4 @@
-console.log "VERSÃO 0.0.17"
+console.log "VERSÃO 0.0.18"
 
 tag App
 
@@ -41,12 +41,12 @@ tag App
         catch err
             console.log err
 
-    def tick
-        schedule interval: 100
-        if char_notifier
-            let test = await char_notifier.readValue
-            console.log test
-        render
+    # def tick
+    #     schedule interval: 100
+    #     if char_notifier
+    #         let test = await char_notifier.readValue
+    #         console.log test
+    #     render
 
 
     def render
