@@ -16,7 +16,7 @@ tag App
 
     def render
         <self>
-            <button style="width: 200px; height: 100px" :tap.listDevices>
-                "123"
+            <button style="width: 200px; height: 200px" :tap.listDevices>
+                "BLE TEST"
 
 Imba.mount <App>
