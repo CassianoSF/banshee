@@ -1,4 +1,8 @@
-console.log "VERSÃO 0.0.20"
+console.log "VERSÃO 0.0.21"
+
+const SERVICE_UUID = 'ab0828b1-198e-4351-b779-901fa0e0371e'
+const CHARACTERISTIC_UUID_RX = '4ac8a682-9736-4e5d-932b-e9b31405049c'
+const CHARACTERISTIC_UUID_TX = '23bf1882-3af7-11ea-b77f-2e728ce88125'
 
 tag App
 
@@ -11,21 +15,21 @@ tag App
         try
             let device = await global:navigator:bluetooth.requestDevice({
                 acceptAllDevices: true
-                optionalServices: ['ab0828b1-198e-4351-b779-901fa0e0371e']
+                optionalServices: [SERVICE_UUID]
             })
             let server = await device:gatt.connect()
             console.log server
-            let service = await server.getPrimaryService('ab0828b1-198e-4351-b779-901fa0e0371e')
+            let service = await server.getPrimaryService(SERVICE_UUID)
             console.log service
             
-            char_notifier = await service.getCharacteristic('23bf1882-3af7-11ea-b77f-2e728ce88125')
-            console.log char_notifier
-            char_notifier.addEventListener('characteristicvaluechanged', &) do |e| 
-                console.log(e)
-                response = e:target:value.getUint8(0)
-                console.log response
+            # char_notifier = await service.getCharacteristic(CHARACTERISTIC_UUID_TX)
+            # console.log char_notifier
+            # char_notifier.addEventListener('characteristicvaluechanged', &) do |e| 
+            #     console.log(e)
+            #     response = e:target:value.getUint8(0)
+            #     console.log response
 
-            let char_writer = await service.getCharacteristic('4ac8a682-9736-4e5d-932b-e9b31405049c')
+            let char_writer = await service.getCharacteristic(CHARACTERISTIC_UUID_RX)
             console.log char_writer
             writer = await char_writer.getDescriptor('gatt.characteristic_user_description')
             console.log writer
@@ -35,7 +39,8 @@ tag App
     def write
         try
             return unless writer
-            let enc = TextEncoder.new();
+            console.log writer
+            let enc = TextEncoder('utf-8');
             console.log(value)
             let test = await writer.writeValue(enc.encode(value))
             console.log test
