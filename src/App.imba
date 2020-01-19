@@ -1,4 +1,4 @@
-console.log "VERSÃO 0.0.5"
+console.log "VERSÃO 0.0.6"
 
 tag App
 
@@ -32,10 +32,10 @@ tag App
 
     def render
         <self>
-            <textbox[value]>
-            <button style="width: 200px; height: 200px;" :tap.connect>
+            <button style="width: 200px; height: 100px;" :tap.connect>
                 "Connect"
-            <button style="width: 200px; height: 200px" :tap.write>
+            <textarea[value] style="width: 200px; height: 100px;">
+            <button style="width: 200px; height: 100px" :tap.write>
                 "Write"
             <div>
                 response
