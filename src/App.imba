@@ -3,7 +3,7 @@ tag App
     def listDevices
         let device = await global:navigator:bluetooth.requestDevice({
             filters: [{
-                services: ['ab0828b1-198e-4351-b779-901fa0e0371e']
+                services: [0x1801, 0x1800, 'ab0828b1-198e-4351-b779-901fa0e0371e']
             }]
         })
         console.log device
