@@ -21,7 +21,8 @@ tag App
             let service = await server.getPrimaryService(SERVICE_UUID)
             
             attr_notifier = await service.getCharacteristic(CHARACTERISTIC_UUID_TX)
-            attr_notifier.addEventListener('characteristicvaluechanged', &) do |e| 
+            attr_notifier.addEventListener('characteristicvaluechanged', &) do |e|
+                console.log(e, 'event')
                 response = e:target:value.getUint8(0)
 
             attr_writer = await service.getCharacteristic(CHARACTERISTIC_UUID_RX)
