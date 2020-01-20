@@ -1,4 +1,4 @@
-console.log "VERSÃO 0.0.29"
+console.log "VERSÃO 0.0.30"
 
 const SERVICE_UUID = 'ab0828b1-198e-4351-b779-901fa0e0371e'
 const CHARACTERISTIC_UUID_RX = '4ac8a682-9736-4e5d-932b-e9b31405049c'
