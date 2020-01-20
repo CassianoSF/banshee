@@ -1,4 +1,4 @@
-console.log "VERSÃO 0.0.36"
+console.log "VERSÃO 0.0.37"
 
 const SERVICE_UUID = 'ab0828b1-198e-4351-b779-901fa0e0371e'
 const CHARACTERISTIC_UUID_RX = '4ac8a682-9736-4e5d-932b-e9b31405049c'
@@ -36,17 +36,16 @@ tag App
     def render
         <self .card>
             <div .card-body>
-                <button .btn style="width: 100%; height: 100px;" :tap.connect>
+                <button .btn style="width:100%;height:100px" :tap.connect>
                     "Connect"
-                <input[value] .form-control .form-control-lg .feedback style="width:100%;height:100px;background-color:black;color:white">
+                <input[value] .form-control .form-control-lg .feedback style="text-align:center;width:100%;height:60px;background-color:black;color:white">
                 <div .row>
                     <div .col>
-                        <button .btn style="width: 100%; height: 100px" :tap.write>
+                        <button .btn style="width:100%;height:100px" :tap.write>
                             "Write"
                     <div .col>
-                        <button .btn style="width: 100%; height: 100px" :tap.read>
+                        <button .btn style="width:100%;height:100px" :tap.read>
                             "Read"
-                        response
-                <input[response] disabled .form-control .form-control-lg .feedback style="width:100%;height:100px;background-color:black;color:white">
+                <input[response] disabled .form-control .form-control-lg .feedback style="text-align:center;width:100%;height:100px;background-color:black;color:white">
 
 Imba.mount <App>
