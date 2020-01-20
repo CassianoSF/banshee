@@ -31,6 +31,7 @@ tag App
         attr_writer.writeValue(encoder.encode(value))
 
     def read
+        return unless attr_notifier
         response = decoder.decode(await attr_notifier.readValue)
 
     def render
