@@ -9,7 +9,7 @@ tag App
     prop value
     prop attr_notifier
     prop attr_writer
-    prop encoder default: TextEncoder.new('utf-8')
+    prop codec default: TextEncoder.new('utf-8')
 
     def connect
         let device = await global:navigator:bluetooth.requestDevice({
@@ -25,19 +25,12 @@ tag App
         attr_writer = await service.getCharacteristic(CHARACTERISTIC_UUID_RX)
         console.log attr_writer
 
-        attr_notifier.addEventListener('characteristicvaluechanged', read)
-
     def write
         return unless attr_writer
-        attr_writer.writeValue(encoder.encode(value))
+        attr_writer.writeValue(codec.encode(value))
 
     def read
-        try
-            console.log($0)
-            # response = e:target:value.getUint8(0)
-            # render
-        catch err
-            console.log err
+        response = codec.decode(await attr_notifier.readValue)
 
     def render
         <self .card>
@@ -45,8 +38,13 @@ tag App
                 <button .btn style="width: 100%; height: 100px;" :tap.connect>
                     "Connect"
                 <input[value] .form-control .form-control-lg .feedback style="width:100%;height:100px;background-color:black;color:white">
-                <button .btn style="width: 100%; height: 100px" :tap.write>
-                    "Write"
+                <div .row>
+                    <div .col>
+                        <button .btn style="width: 100%; height: 100px" :tap.write>
+                            "Write"
+                    <div .col>
+                        <button .btn style="width: 100%; height: 100px" :tap.read>
+                            "Read"
                         response
                 <input[response] disabled .form-control .form-control-lg .feedback style="width:100%;height:100px;background-color:black;color:white">
 

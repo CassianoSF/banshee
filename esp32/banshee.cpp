@@ -52,10 +52,22 @@ void setup() {
     
     BLEService *service = server->createService(SERVICE_UUID);
     
-    characteristicTX = service->createCharacteristic(CHARACTERISTIC_UUID_TX, BLECharacteristic::PROPERTY_NOTIFY);
+    characteristicTX = service->createCharacteristic(
+        CHARACTERISTIC_UUID_TX, 
+        BLECharacteristic::PROPERTY_READ  |
+        BLECharacteristic::PROPERTY_WRITE  |
+        BLECharacteristic::PROPERTY_NOTIFY |
+        BLECharacteristic::PROPERTY_INDICATE
+    );
     characteristicTX->addDescriptor(new BLEDescriptor((uint16_t)0x2902));
 
-    characteristicRX = service->createCharacteristic(CHARACTERISTIC_UUID_RX, BLECharacteristic::PROPERTY_WRITE);
+    characteristicRX = service->createCharacteristic(
+        CHARACTERISTIC_UUID_RX, 
+        BLECharacteristic::PROPERTY_READ  |
+        BLECharacteristic::PROPERTY_WRITE  |
+        BLECharacteristic::PROPERTY_NOTIFY |
+        BLECharacteristic::PROPERTY_INDICATE
+    );
     characteristicRX->addDescriptor(new BLEDescriptor((uint16_t)0x2901));
     characteristicRX->setCallbacks(new CharacteristicCallbacks());
     
