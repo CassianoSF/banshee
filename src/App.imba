@@ -25,6 +25,7 @@ tag App
             attr_notifier.oncharacteristicvaluechanged = do |e|
                 console.log(e, 'event')
                 response = e:target:value.getUint8(0)
+                render
 
             attr_writer = await service.getCharacteristic(CHARACTERISTIC_UUID_RX)
             console.log attr_writer
