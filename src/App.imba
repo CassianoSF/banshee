@@ -1,4 +1,4 @@
-console.log "VERSÃO 0.0.26"
+console.log "VERSÃO 0.0.27"
 
 const SERVICE_UUID = 'ab0828b1-198e-4351-b779-901fa0e0371e'
 const CHARACTERISTIC_UUID_RX = '4ac8a682-9736-4e5d-932b-e9b31405049c'
@@ -22,17 +22,15 @@ tag App
             let service = await server.getPrimaryService(SERVICE_UUID)
             console.log service
             
-            # char_notifier = await service.getCharacteristic(CHARACTERISTIC_UUID_TX)
-            # console.log char_notifier
-            # char_notifier.addEventListener('characteristicvaluechanged', &) do |e| 
-            #     console.log(e)
-            #     response = e:target:value.getUint8(0)
-            #     console.log response
+            char_notifier = await service.getCharacteristic(CHARACTERISTIC_UUID_TX)
+            console.log char_notifier
+            char_notifier.addEventListener('characteristicvaluechanged', &) do |e| 
+                console.log(e)
+                response = e:target:value.getUint8(0)
+                console.log response
 
-            let char_writer = await service.getCharacteristic(CHARACTERISTIC_UUID_RX)
-            console.log char_writer
-            writer = await char_writer.getDescriptor('gatt.characteristic_user_description')
-            console.log writer
+            writer = await service.getCharacteristic(CHARACTERISTIC_UUID_RX)
+
         catch err
             console.log err
 
@@ -42,7 +40,7 @@ tag App
             console.log writer
             let enc = TextEncoder.new('utf-8');
             console.log(value)
-            let test = writer.writeWithoutResponse(enc.encode(value))
+            let test = writer.writeValue(enc.encode(value))
             console.log test
             console.log(await test)
         catch err
