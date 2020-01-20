@@ -1,4 +1,4 @@
-console.log "VERSÃO 0.0.35"
+console.log "VERSÃO 0.0.36"
 
 const SERVICE_UUID = 'ab0828b1-198e-4351-b779-901fa0e0371e'
 const CHARACTERISTIC_UUID_RX = '4ac8a682-9736-4e5d-932b-e9b31405049c'
@@ -9,7 +9,8 @@ tag App
     prop value
     prop attr_notifier
     prop attr_writer
-    prop codec default: TextEncoder.new('utf-8')
+    prop encoder default: TextEncoder.new('utf-8')
+    prop decoder default: TextDecoder.new('utf-8')
 
     def connect
         let device = await global:navigator:bluetooth.requestDevice({
@@ -27,10 +28,10 @@ tag App
 
     def write
         return unless attr_writer
-        attr_writer.writeValue(codec.encode(value))
+        attr_writer.writeValue(encoder.encode(value))
 
     def read
-        response = codec.decode(await attr_notifier.readValue)
+        response = decoder.decode(await attr_notifier.readValue)
 
     def render
         <self .card>
