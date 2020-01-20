@@ -1,4 +1,4 @@
-console.log "VERSÃO 0.0.24"
+console.log "VERSÃO 0.0.26"
 
 const SERVICE_UUID = 'ab0828b1-198e-4351-b779-901fa0e0371e'
 const CHARACTERISTIC_UUID_RX = '4ac8a682-9736-4e5d-932b-e9b31405049c'
@@ -42,7 +42,7 @@ tag App
             console.log writer
             let enc = TextEncoder.new('utf-8');
             console.log(value)
-            let test = writer.writeValueWithoutResponse(enc.encode(value))
+            let test = writer.writeWithoutResponse(enc.encode(value))
             console.log test
             console.log(await test)
         catch err
@@ -57,15 +57,14 @@ tag App
 
 
     def render
-        <self .content>
-            <div .card>
-                <div .card-body>
-                    <button .btn style="width: 100%; height: 100px;" :tap.connect>
-                        "Connect"
-                    <input[value] .form-control .form-control-lg .feedback style="width:100%;height:100px;background-color:black;color:white">
-                    <button .btn style="width: 100%; height: 100px" :tap.write>
-                        "Write"
-                            response
-                    <input[response] disabled .form-control .form-control-lg .feedback style="width:100%;height:100px;background-color:black;color:white">
+        <self .card>
+            <div .card-body>
+                <button .btn style="width: 100%; height: 100px;" :tap.connect>
+                    "Connect"
+                <input[value] .form-control .form-control-lg .feedback style="width:100%;height:100px;background-color:black;color:white">
+                <button .btn style="width: 100%; height: 100px" :tap.write>
+                    "Write"
+                        response
+                <input[response] disabled .form-control .form-control-lg .feedback style="width:100%;height:100px;background-color:black;color:white">
 
 Imba.mount <App>
