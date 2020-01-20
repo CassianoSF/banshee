@@ -1,4 +1,4 @@
-console.log "VERSÃO 0.0.28"
+console.log "VERSÃO 0.0.29"
 
 const SERVICE_UUID = 'ab0828b1-198e-4351-b779-901fa0e0371e'
 const CHARACTERISTIC_UUID_RX = '4ac8a682-9736-4e5d-932b-e9b31405049c'
@@ -21,11 +21,13 @@ tag App
             let service = await server.getPrimaryService(SERVICE_UUID)
             
             attr_notifier = await service.getCharacteristic(CHARACTERISTIC_UUID_TX)
-            attr_notifier.addEventListener('characteristicvaluechanged', &) do |e|
+            console.log attr_notifier
+            attr_notifier.oncharacteristicvaluechanged = do |e|
                 console.log(e, 'event')
                 response = e:target:value.getUint8(0)
 
             attr_writer = await service.getCharacteristic(CHARACTERISTIC_UUID_RX)
+            console.log attr_writer
 
         catch err
             console.log err
