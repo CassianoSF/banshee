@@ -5,7 +5,6 @@ const CHARACTERISTIC_UUID_RX = '4ac8a682-9736-4e5d-932b-e9b31405049c'
 const CHARACTERISTIC_UUID_TX = '23bf1882-3af7-11ea-b77f-2e728ce88125'
 
 tag App
-
     prop response default: ''
     prop value
     prop attr_notifier
@@ -22,11 +21,11 @@ tag App
         
         attr_notifier = await service.getCharacteristic(CHARACTERISTIC_UUID_TX)
         console.log attr_notifier
-        attr_notifier.addEventListener('characteristicvaluechanged', read)
 
         attr_writer = await service.getCharacteristic(CHARACTERISTIC_UUID_RX)
         console.log attr_writer
 
+        attr_notifier.addEventListener('characteristicvaluechanged', read)
 
     def write
         return unless attr_writer
