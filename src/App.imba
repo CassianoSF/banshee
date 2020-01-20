@@ -1,4 +1,4 @@
-console.log "VERSÃO 0.0.30"
+console.log "VERSÃO 0.0.31"
 
 const SERVICE_UUID = 'ab0828b1-198e-4351-b779-901fa0e0371e'
 const CHARACTERISTIC_UUID_RX = '4ac8a682-9736-4e5d-932b-e9b31405049c'
@@ -12,36 +12,30 @@ tag App
     prop attr_writer
 
     def connect
-        try
-            let device = await global:navigator:bluetooth.requestDevice({
-                acceptAllDevices: true
-                optionalServices: [SERVICE_UUID]
-            })
-            let server = await device:gatt.connect()
-            let service = await server.getPrimaryService(SERVICE_UUID)
-            
-            attr_notifier = await service.getCharacteristic(CHARACTERISTIC_UUID_TX)
-            console.log attr_notifier
-            attr_notifier.oncharacteristicvaluechanged = do |e|
-                console.log(e, 'event')
-                response = e:target:value.getUint8(0)
-                render
+        let device = await global:navigator:bluetooth.requestDevice({
+            acceptAllDevices: true
+            optionalServices: [SERVICE_UUID]
+        })
+        let server = await device:gatt.connect()
+        let service = await server.getPrimaryService(SERVICE_UUID)
+        
+        attr_notifier = await service.getCharacteristic(CHARACTERISTIC_UUID_TX)
+        console.log attr_notifier
+        attr_notifier.addEventListener('characteristicvaluechanged', read)
 
-            attr_writer = await service.getCharacteristic(CHARACTERISTIC_UUID_RX)
-            console.log attr_writer
+        attr_writer = await service.getCharacteristic(CHARACTERISTIC_UUID_RX)
+        console.log attr_writer
 
-        catch err
-            console.log err
 
     def write
-        try
-            return unless attr_writer
-            let enc = TextEncoder.new('utf-8')
-            attr_writer.writeValue(enc.encode(value))
+        return unless attr_writer
+        let enc = TextEncoder.new('utf-8')
+        attr_writer.writeValue(enc.encode(value))
 
-        catch err
-            console.log err
-
+    def read e
+        console.log(e, 'event')
+        response = e:target:value.getUint8(0)
+        render
 
     def render
         <self .card>
