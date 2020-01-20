@@ -8,8 +8,8 @@ tag App
 
     prop response default: ''
     prop value
-    prop char_notifier
-    prop writer
+    prop attr_notifier
+    prop attr_writer
 
     def connect
         try
@@ -18,40 +18,25 @@ tag App
                 optionalServices: [SERVICE_UUID]
             })
             let server = await device:gatt.connect()
-            console.log server
             let service = await server.getPrimaryService(SERVICE_UUID)
-            console.log service
             
-            char_notifier = await service.getCharacteristic(CHARACTERISTIC_UUID_TX)
-            console.log char_notifier
-            char_notifier.addEventListener('characteristicvaluechanged', &) do |e| 
-                console.log(e)
+            attr_notifier = await service.getCharacteristic(CHARACTERISTIC_UUID_TX)
+            attr_notifier.addEventListener('characteristicvaluechanged', &) do |e| 
                 response = e:target:value.getUint8(0)
-                console.log response
 
-            writer = await service.getCharacteristic(CHARACTERISTIC_UUID_RX)
+            attr_writer = await service.getCharacteristic(CHARACTERISTIC_UUID_RX)
 
         catch err
             console.log err
 
     def write
         try
-            return unless writer
-            console.log writer
-            let enc = TextEncoder.new('utf-8');
-            console.log(value)
-            let test = writer.writeValue(enc.encode(value))
-            console.log test
-            console.log(await test)
+            return unless attr_writer
+            let enc = TextEncoder.new('utf-8')
+            attr_writer.writeValue(enc.encode(value))
+
         catch err
             console.log err
-
-    # def tick
-    #     schedule interval: 100
-    #     if char_notifier
-    #         let test = await char_notifier.readValue
-    #         console.log test
-    #     render
 
 
     def render
