@@ -1,4 +1,4 @@
-console.log "VERSÃO 0.0.21"
+console.log "VERSÃO 0.0.23"
 
 const SERVICE_UUID = 'ab0828b1-198e-4351-b779-901fa0e0371e'
 const CHARACTERISTIC_UUID_RX = '4ac8a682-9736-4e5d-932b-e9b31405049c'
@@ -40,9 +40,9 @@ tag App
         try
             return unless writer
             console.log writer
-            let enc = TextEncoder('utf-8');
+            let enc = TextEncoder.new('utf-8');
             console.log(value)
-            let test = await writer.writeValue(enc.encode(value))
+            let test = await writer.writeValue(enc.encode(value), {type: 'without-response'})
             console.log test
         catch err
             console.log err
