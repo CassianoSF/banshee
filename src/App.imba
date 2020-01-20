@@ -1,4 +1,4 @@
-console.log "VERSÃO 0.0.33"
+console.log "VERSÃO 0.0.34"
 
 const SERVICE_UUID = 'ab0828b1-198e-4351-b779-901fa0e0371e'
 const CHARACTERISTIC_UUID_RX = '4ac8a682-9736-4e5d-932b-e9b31405049c'
@@ -25,17 +25,17 @@ tag App
         attr_writer = await service.getCharacteristic(CHARACTERISTIC_UUID_RX)
         console.log attr_writer
 
-        attr_notifier.addEventListener('characteristicvaluechanged', do |e| read(e))
+        attr_notifier.addEventListener('characteristicvaluechanged', read)
 
     def write
         return unless attr_writer
         attr_writer.writeValue(encoder.encode(value))
 
-    def read e
+    def read
         try
-            console.log(e, 'event')
-            response = e:target:value.getUint8(0)
-            render
+            console.log($0)
+            # response = e:target:value.getUint8(0)
+            # render
         catch err
             console.log err
 
