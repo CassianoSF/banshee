@@ -1,4 +1,4 @@
-console.log "VERSÃO 0.0.37"
+console.log "VERSÃO 0.0.38"
 
 const SERVICE_UUID = 'ab0828b1-198e-4351-b779-901fa0e0371e'
 const CHARACTERISTIC_UUID_RX = '4ac8a682-9736-4e5d-932b-e9b31405049c'
@@ -11,6 +11,11 @@ tag App
     prop attr_writer
     prop encoder default: TextEncoder.new('utf-8')
     prop decoder default: TextDecoder.new('utf-8')
+    prop ready
+
+    def mount
+        schedule interval: 100
+        render
 
     def connect
         let device = await global:navigator:bluetooth.requestDevice({
@@ -25,6 +30,7 @@ tag App
 
         attr_writer = await service.getCharacteristic(CHARACTERISTIC_UUID_RX)
         console.log attr_writer
+        ready = true
 
     def write
         return unless attr_writer
@@ -33,19 +39,27 @@ tag App
     def read
         response = decoder.decode(await attr_notifier.readValue)
 
+
+    def tick
+        read if ready
+        render
+
+
     def render
         <self .card>
             <div .card-body>
                 <button .btn style="width:100%;height:100px" :tap.connect>
                     "Connect"
-                <input[value] .form-control .form-control-lg .feedback style="text-align:center;width:100%;height:60px;background-color:black;color:white">
-                <div .row>
-                    <div .col>
-                        <button .btn style="width:100%;height:100px" :tap.write>
-                            "Write"
-                    <div .col>
-                        <button .btn style="width:100%;height:100px" :tap.read>
-                            "Read"
-                <input[response] disabled .form-control .form-control-lg .feedback style="text-align:center;width:100%;height:100px;background-color:black;color:white">
+                <div style="height: 500px; width: 100%;background-color: #113;color: #fff;font-size:50px;text-align: center">
+                    "{Number(response).toFixed(2)}cm"
+                # <input[value] .form-control .form-control-lg .feedback style="text-align:center;width:100%;height:60px;background-color:black;color:white">
+                # <div .row>
+                #     <div .col>
+                #         <button .btn style="width:100%;height:100px" :tap.write>
+                #             "Write"
+                #     <div .col>
+                #         <button .btn style="width:100%;height:100px" :tap.read>
+                #             "Read"
+                # <input[response] disabled .form-control .form-control-lg .feedback style="text-align:center;width:100%;height:100px;background-color:black;color:white">
 
 Imba.mount <App>
