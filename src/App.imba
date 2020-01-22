@@ -1,4 +1,4 @@
-console.log "VERSÃO 0.0.39"
+console.log "VERSÃO 0.0.40"
 
 const SERVICE_UUID = 'ab0828b1-198e-4351-b779-901fa0e0371e'
 const CHARACTERISTIC_UUID_RX = '4ac8a682-9736-4e5d-932b-e9b31405049c'
@@ -14,7 +14,7 @@ tag App
     prop ready
 
     def mount
-        schedule interval: 100
+        schedule interval: 500
         render
 
     def connect
@@ -39,12 +39,11 @@ tag App
     def read
         return unless attr_notifier
         response = decoder.decode(await attr_notifier.readValue)
-
+        console.log response
 
     def tick
         await read if ready
         render
-
 
     def render
         <self .card>
