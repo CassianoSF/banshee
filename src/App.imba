@@ -1,4 +1,4 @@
-console.log "VERSÃO 0.0.40"
+console.log "VERSÃO 0.0.41"
 
 const SERVICE_UUID = 'ab0828b1-198e-4351-b779-901fa0e0371e'
 const CHARACTERISTIC_UUID_RX = '4ac8a682-9736-4e5d-932b-e9b31405049c'
@@ -14,7 +14,7 @@ tag App
     prop ready
 
     def mount
-        schedule interval: 500
+        schedule interval: 100
         render
 
     def connect
@@ -42,7 +42,8 @@ tag App
         console.log response
 
     def tick
-        await read if ready
+        if ready
+            try await read 
         render
 
     def render
