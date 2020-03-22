@@ -11,6 +11,11 @@ BLECharacteristic *characteristicRX;
 BLECharacteristic *characteristicTX; 
 
 
+void vMyTask(void *){
+    Serial.println("teste");
+    vTaskSuspend(NULL);
+}
+
 class ServerCallbacks: public BLEServerCallbacks {
     void onConnect(BLEServer* pServer) {
         Serial.println('connected!');
